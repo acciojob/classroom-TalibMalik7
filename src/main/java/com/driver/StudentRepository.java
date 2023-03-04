@@ -78,10 +78,18 @@ public class StudentRepository {
       }
     }
 
-    public void deleteAllTeachers(){
-      teacher_student.clear();
-      student_map.clear();
-      teacher_student.clear();
+    public void deleteAllTeachers() {
+        for (String teacher : teacher_student.keySet()) {
+            if (teacher_map.containsKey(teacher)) teacher_map.remove(teacher);
+
+                for (String student : teacher_student.get(teacher)) {
+                    if (student_map.containsKey(student)) {
+                        student_map.remove(student);
+                    }
+
+                teacher_student.remove(teacher);
+            }
+        }
     }
 
 }
